@@ -1,3 +1,5 @@
+import { isNotNumber } from "./utils/isNotNumber"
+
 const calculateBmi = (height: number, weight: number): string => {
   const result = weight / ((height / 100) * (height / 100))
   if (result < 16) {
@@ -19,4 +21,31 @@ const calculateBmi = (height: number, weight: number): string => {
   }
 }
 
-console.log(calculateBmi(180, 74))
+interface Values {
+  height: number
+  weight: number
+}
+
+const parseArguments = (argv: string[]): Values => {
+  // ts-node file.ts argv1 argv2
+  if (argv.length > 4) throw new Error("Too many arguments")
+  if (argv.length < 4) throw new Error("Not enought arguments")
+
+  if (isNotNumber(argv[2]) || isNotNumber(argv[3])) throw new Error("Please provide height and weight")
+
+  return {
+    height: Number(argv[2]),
+    weight: Number(argv[3])
+  }
+}
+
+try {
+  const { height, weight } = parseArguments(process.argv)
+  console.log(calculateBmi(height, weight))
+} catch (error: unknown) {
+  let errorMessage = "Error: "
+  if (error instanceof Error) {
+    errorMessage += error.message
+  }
+  console.log(errorMessage)
+}

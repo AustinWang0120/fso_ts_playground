@@ -1,3 +1,5 @@
+import { isNotNumber } from "./utils/isNotNumber"
+
 interface Result {
   periodLength: number
   trainingDays: number
@@ -28,4 +30,34 @@ const calculateExercise = (data: number[], target: number): Result => {
   }
 }
 
-console.log(calculateExercise([3, 0, 2, 4.5, 0, 3, 1], 2))
+interface Data {
+  target: number
+  data: number[]
+}
+
+const parseArguments = (argv: string[]): Data => {
+  if (argv.length < 4) throw new Error("Not enough arguments")
+  if (isNotNumber(argv[2])) throw new Error("Please provide numbers")
+
+  const target = Number(argv[2])
+
+  let data = []
+
+  for (let i = 3; i < argv.length; i++) {
+    if (isNotNumber(argv[i])) throw new Error("Please provide numbers")
+    data.push(Number(argv[i]))
+  }
+
+  return {
+    target, data
+  }
+}
+
+try {
+  const { target, data } = parseArguments(process.argv)
+  console.log(calculateExercise(data, target))
+} catch (error: unknown) {
+  if (error instanceof Error) {
+    console.log("Error:", error.message)
+  }
+}
