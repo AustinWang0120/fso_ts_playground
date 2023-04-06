@@ -15,7 +15,7 @@ const calculateExercise = (data: number[], target: number): Result => {
   let trainingDays = 0
 
   for (let i = 0; i < data.length; i++) {
-    let hours = data[i]
+    const hours = data[i]
     if (hours !== 0) {
       total += hours
       trainingDays += 1
@@ -41,7 +41,7 @@ const parseArguments = (argv: string[]): Data => {
 
   const target = Number(argv[2])
 
-  let data = []
+  const data = []
 
   for (let i = 3; i < argv.length; i++) {
     if (isNotNumber(argv[i])) throw new Error("Please provide numbers")
