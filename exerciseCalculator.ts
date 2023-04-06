@@ -1,4 +1,4 @@
-import { isNotNumber } from "./utils/isNotNumber"
+// import { isNotNumber } from "./utils/isNotNumber"
 
 interface Result {
   periodLength: number
@@ -8,7 +8,7 @@ interface Result {
   average: number
 }
 
-const calculateExercise = (data: number[], target: number): Result => {
+export const calculateExercise = (data: number[], target: number): Result => {
   const periodLength = data.length
 
   let total = 0
@@ -30,34 +30,34 @@ const calculateExercise = (data: number[], target: number): Result => {
   }
 }
 
-interface Data {
-  target: number
-  data: number[]
-}
+// interface Data {
+//   target: number
+//   data: number[]
+// }
 
-const parseArguments = (argv: string[]): Data => {
-  if (argv.length < 4) throw new Error("Not enough arguments")
-  if (isNotNumber(argv[2])) throw new Error("Please provide numbers")
+// const parseArguments = (argv: string[]): Data => {
+//   if (argv.length < 4) throw new Error("Not enough arguments")
+//   if (isNotNumber(argv[2])) throw new Error("Please provide numbers")
 
-  const target = Number(argv[2])
+//   const target = Number(argv[2])
 
-  const data = []
+//   const data = []
 
-  for (let i = 3; i < argv.length; i++) {
-    if (isNotNumber(argv[i])) throw new Error("Please provide numbers")
-    data.push(Number(argv[i]))
-  }
+//   for (let i = 3; i < argv.length; i++) {
+//     if (isNotNumber(argv[i])) throw new Error("Please provide numbers")
+//     data.push(Number(argv[i]))
+//   }
 
-  return {
-    target, data
-  }
-}
+//   return {
+//     target, data
+//   }
+// }
 
-try {
-  const { target, data } = parseArguments(process.argv)
-  console.log(calculateExercise(data, target))
-} catch (error: unknown) {
-  if (error instanceof Error) {
-    console.log("Error:", error.message)
-  }
-}
+// try {
+//   const { target, data } = parseArguments(process.argv)
+//   console.log(calculateExercise(data, target))
+// } catch (error: unknown) {
+//   if (error instanceof Error) {
+//     console.log("Error:", error.message)
+//   }
+// }
